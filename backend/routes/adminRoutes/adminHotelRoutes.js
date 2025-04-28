@@ -47,5 +47,19 @@ router.post("/add-hotel", upload.single('hotelImage'), (req, res) => {
     });
 });
 
+router.put("/deactivate-hotel/:id", (req, res) => {
+    const hotelId = req.params.id;
+    const sql = "UPDATE Hotel SET Status = 'inactive' WHERE HotelID = ?";
+
+    db.query(sql, [hotelId], (err, result) => {
+        if (err) {
+            console.error("Error deactivating hotel:", err);
+            res.status(500).send("Error deactivating hotel");
+        } else {
+            res.status(200).send("Hotel deactivated successfully");
+        }
+    });
+});
+
 
 module.exports = router;
