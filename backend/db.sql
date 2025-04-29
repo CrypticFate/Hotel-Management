@@ -111,3 +111,85 @@ CREATE TABLE Room (
 
 
 );
+
+-- Create Bed_Type Table
+CREATE TABLE Bed_Type (
+    BedTypeID INT PRIMARY KEY AUTO_INCREMENT,
+    RoomID INT,
+    BedType VARCHAR(255) NOT NULL,
+    Size VARCHAR(50), -- Added size of the bed (e.g., King, Queen)
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+);
+
+-- Create Feature Table
+CREATE TABLE Feature (
+    FeatureID INT PRIMARY KEY AUTO_INCREMENT,
+    RoomID INT,
+    GuestID INT,
+    FeatureName VARCHAR(255) NOT NULL,
+    Description TEXT, -- Added description for features
+    FeatureAdditionalPrice DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE,
+    FOREIGN KEY (GuestID) REFERENCES Guest(GuestID) ON DELETE CASCADE
+);
+
+
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY AUTO_INCREMENT,
+    BookingID INT NOT NULL,
+    AmountPaid DECIMAL(10, 2) NOT NULL,
+    PaymentDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID) ON DELETE CASCADE
+);
+
+CREATE TABLE Inventory (
+    InventoryID INT PRIMARY KEY AUTO_INCREMENT,
+    HotelID INT NOT NULL,
+    ItemName VARCHAR(255) NOT NULL,
+    Quantity INT DEFAULT 0,
+    LastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE
+);
+
+CREATE TABLE InventoryTransactions (
+    TransactionID INT PRIMARY KEY AUTO_INCREMENT,
+    InventoryID INT NOT NULL,
+    HotelID INT NOT NULL,
+    TransactionType ENUM('Order', 'Received') NOT NULL,
+    Quantity INT NOT NULL,
+    UnitPrice DECIMAL(10, 2),
+    TransactionDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ReceiveDate TIMESTAMP NULL DEFAULT NULL,
+    Status ENUM('Pending', 'Completed') DEFAULT 'Pending',
+    FOREIGN KEY (InventoryID) REFERENCES Inventory(InventoryID) ON DELETE CASCADE,
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE
+);
+
+CREATE TABLE BillMaintenanceLedger (
+    LedgerID INT PRIMARY KEY AUTO_INCREMENT,
+    HotelID INT NOT NULL,
+    ServiceType VARCHAR(255) NOT NULL,
+    Amount DECIMAL(10, 2) NOT NULL,
+    LedgerDate DATE NOT NULL,
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE
+);
+
+
+ALTER TABLE Employee ADD COLUMN HotelID INT AFTER DeptID;
+
+-- Set foreign key constraint
+ALTER TABLE Employee
+ADD CONSTRAINT fk_emp_hotel
+FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID)
+ON DELETE CASCADE;
+
+
+ALTER TABLE Room
+ADD COLUMN RoomImage LONGBLOB NULL AFTER BasePrice;
+
+ALTER TABLE Hotel
+ADD COLUMN HotelImage LONGBLOB;
+
+
+ALTER TABLE Available_Rooms
+ADD COLUMN RoomImage LONGBLOB;
