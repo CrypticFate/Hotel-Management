@@ -49,6 +49,51 @@ router.get("/get-room-classes", (req, res) => {
 });
 
 
+// ✅ Update Room
+router.put("/update-room/:roomID", upload.single("roomImage"), (req, res) => {
+    const { classTypeID, basePrice, maxOccupancy } = req.body;
+    const roomID = req.params.roomID;
+    const roomImage = req.file ? req.file.buffer : null; // Get image from request (if present)
 
+    // SQL query to update room details
+    const sql = `
+        UPDATE available_rooms
+        SET RoomClassID = ?, BasePrice = ?, MaxOccupancy = ?, RoomImage = ?
+        WHERE RoomID = ?
+    `;
+
+    db.query(sql, [classTypeID, basePrice, maxOccupancy, roomImage, roomID], (err, result) => {
+        if (err) {
+            console.error("Error updating room:", err);
+            return res.status(500).send("Error updating room details");
+        } else {
+            res.status(200).send("Room updated successfully");
+        }
+    });
+});
+
+
+// ✅ Add New Room (NO bookingID anymore)
+router.post('/add-room', upload.single('roomImage'), async (req, res) => {
+    const { hotelID, roomNumber, roomClassID, maxOccupancy, basePrice } = req.body;
+    const roomImage = req.file ? req.file.buffer : null;
+
+    try {
+        if (!hotelID || !roomNumber || !roomClassID || !maxOccupancy || !basePrice || !roomImage) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        await db.promise().query(
+            `INSERT INTO available_rooms (RoomNumber, RoomClassID, HotelID, MaxOccupancy, BasePrice, RoomImage)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [roomNumber, roomClassID, hotelID, maxOccupancy, basePrice, roomImage]
+        );
+
+        res.status(201).json({ message: 'Room added successfully' });
+    } catch (err) {
+        console.error('Add Room Error:', err);
+        res.status(500).json({ error: 'Failed to add room', details: err.message });
+    }
+});
 
 module.exports = router;
