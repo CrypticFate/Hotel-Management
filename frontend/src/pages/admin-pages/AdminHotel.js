@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import Navbar from "../../components/Navbar"; // ✅ Add your Navbar
+import Navbar from "../../components/Navbar"; 
 import AddHotelPopup from "../../components/AddHotelPopup";
 import DeleteConfirmationPopup from "../../components/DeleteConfirmationPopup";
 import EditHotelPopup from "../../components/EditHotelPopup";
@@ -40,7 +40,7 @@ const AdminHotel = () => {
             .then(() => {
                 alert(`${selectedHotel.Name} has been deactivated.`);
                 setShowDeletePopup(false);
-                fetchHotels(); // Refresh hotel list
+                fetchHotels();
             })
             .catch((error) => {
                 console.error("Error deactivating hotel:", error);
@@ -55,7 +55,7 @@ const AdminHotel = () => {
 
     return (
         <div className="hotel-container">
-            <Navbar /> {/* ✅ Navbar at the very top */}
+            <Navbar />
 
             <div className="hotel-header">
                 <h2>Hotel List</h2>

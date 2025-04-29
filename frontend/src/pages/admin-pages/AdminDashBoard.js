@@ -12,7 +12,7 @@ const AdminDashBoard = () => {
             color: "#3B82F6",
             path: "/update-managers",
             icon: <FiUsers className="card-icon" />,
-            // stat: "5 Manager Accounts"
+          
         },
         {
             title: "Expense Tracking",
@@ -20,7 +20,7 @@ const AdminDashBoard = () => {
             color: "#10B981",
             path: "/all-expenses",
             icon: <FiDollarSign className="card-icon" />,
-            // stat: "$12,450 Total"
+           
         },
         {
             title: "Hotel Management",
@@ -28,7 +28,7 @@ const AdminDashBoard = () => {
             color: "#F59E0B",
             path: "/admin-hotels",
             icon: <FiHome className="card-icon" />,
-            // stat: "3 Active Hotels"
+    
         }
     ];
 
@@ -36,10 +36,7 @@ const AdminDashBoard = () => {
         <div className="admin-dashboard-wrapper">
             <Navbar />
             <div className="admin-dashboard-container">
-                {/* <header className="dashboard-header">
-                    <h1 className="dashboard-title">Admin Dashboard</h1>
-                    <div className="header-accent"></div>
-                </header> */}
+                
 
                 <div className="admin-grid-container">
                     {cards.map((card, index) => (
