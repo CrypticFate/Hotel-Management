@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../dbconn");
+
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -27,6 +28,8 @@ router.get("/get-hotels", (req, res) => {
     });
 });
 
+
+
 router.post("/add-hotel", upload.single('hotelImage'), (req, res) => {
     const { name, description, starRating, location, status } = req.body;
     const hotelImage = req.file ? req.file.buffer : null;
@@ -47,6 +50,7 @@ router.post("/add-hotel", upload.single('hotelImage'), (req, res) => {
     });
 });
 
+
 router.put("/deactivate-hotel/:id", (req, res) => {
     const hotelId = req.params.id;
     const sql = "UPDATE Hotel SET Status = 'inactive' WHERE HotelID = ?";
@@ -62,6 +66,8 @@ router.put("/deactivate-hotel/:id", (req, res) => {
 });
 
 
+
+// 👇 Use this router in your main router file
 router.put("/update-hotel/:id", upload.single('hotelImage'), (req, res) => {
     const hotelId = req.params.id;
     const { Name, Description, StarRating, Location } = req.body;
@@ -100,6 +106,8 @@ router.put("/update-hotel/:id", upload.single('hotelImage'), (req, res) => {
         res.status(200).send("Hotel updated successfully");
     });
 });
+
+
 
 
 module.exports = router;
