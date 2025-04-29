@@ -248,7 +248,64 @@ const CurrentGuests = () => {
 </div>
 
 
-    
+{showFilterModal && (
+    <div className="filter-modal">
+        <h2>Filter Guests</h2>
+        <label>First Name:</label>
+        <input
+            type="text"
+            name="firstName"
+            value={filters.firstName}
+            onChange={handleFilterChange}
+        />
+        <label>Last Name:</label>
+        <input
+            type="text"
+            name="lastName"
+            value={filters.lastName}
+            onChange={handleFilterChange}
+        />
+        <label>Phone Number:</label>
+        <input
+            type="text"
+            name="phoneNumber"
+            value={filters.phoneNumber}
+            onChange={handleFilterChange}
+        />
+        <label>Email:</label>
+        <input
+            type="email"
+            name="email"
+            value={filters.email}
+            onChange={handleFilterChange}
+        />
+        <label>Guest ID:</label>
+        <input
+            type="text"
+            name="guestID"
+            value={filters.guestID}
+            onChange={handleFilterChange}
+        />
+        <label>From Date:</label>
+        <input
+            type="date"
+            name="fromDate"
+            value={filters.fromDate}
+            onChange={handleFilterChange}
+        />
+        <label>To Date:</label>
+        <input
+            type="date"
+            name="toDate"
+            value={filters.toDate}
+            onChange={handleFilterChange}
+        />
+        <div className="filter-actions">
+            <button onClick={applyFilters}>Apply Filters</button>
+            <button onClick={() => setShowFilterModal(false)}>Cancel</button>
+        </div>
+    </div>
+)}
 </div>
 </>
 
