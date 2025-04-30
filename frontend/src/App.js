@@ -29,7 +29,14 @@ function App() {
     <div className="App">
       <title>Hotel Management System</title>
       <Routes>
-        
+      <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        {/*Receptionist Pages*/}
+        <Route path="/rp-dashboard" element={<PrivateRoute element={<RPDash />} role="receptionist" />} />
+        <Route path="/receptionist" element={<PrivateRoute element={<Receptionist />} role="receptionist" />} />
+        <Route path="/checkout" element={<PrivateRoute element={<Checkout />} role="receptionist" />} />
+        <Route path="/feature" element={<PrivateRoute element={<Features />} role="receptionist" />} />
+        <Route path="/real-checkout" element={<PrivateRoute element={<RealCheckout />} role="receptionist" />} />
        
       
         
