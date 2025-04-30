@@ -15,7 +15,7 @@ import AdminHotel from "./pages/admin-pages/AdminHotel.js";
 import ManRoom from "./pages/manager-pages/Rooms.js";
 import Inventory from "./pages/manager-pages/Inventory.js";
 import Ledgerbook from "./pages/manager-pages/Ledgerbook";
-import Hotelist from "./pages/admin-pages/Hotelist";
+import Hotelist from "./pages/admin-pages/HotelList";
 import FinancialReport from "./pages/admin-pages/FinancialReport";
 import MaintenanceLedgerPage from "./pages/manager-pages/BillLedger";
 

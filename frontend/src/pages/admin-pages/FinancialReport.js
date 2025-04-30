@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import Navbar from '../../components/Navbar';
 import './FinancialReport.css';
-import './FincacialCard.css';
+import './FinancialCard.css';
 import {Navigate} from "react-router-dom";
 
 const FinancialReport = () => {
