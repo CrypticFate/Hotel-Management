@@ -1,0 +1,137 @@
+.ledger-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.controls {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.refresh-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.refresh-button:hover {
+    background-color: #45a049;
+}
+
+.transactions-section {
+    margin-top: 30px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* ✅ Common table styles for both Transaction History & Summary */
+.ledger-table,
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.ledger-table th,
+.ledger-table td,
+.summary-table th,
+.summary-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.ledger-table th,
+.summary-table th {
+    background-color: #f9fafb; /* Light and clean */
+    font-weight: bold;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.ledger-table tr:hover,
+.summary-table tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* ✅ Status badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-badge.pending {
+    background-color: #facc15;
+    color: #92400e;
+}
+
+.status-badge.completed {
+    background-color: #4ade80;
+    color: #065f46;
+}
+
+/* ✅ Receive Button */
+.receive-button {
+    padding: 6px 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.receive-button:hover {
+    background-color: #2563eb;
+}
+
+/* ✅ Empty States */
+.no-transactions,
+.loading,
+.error {
+    text-align: center;
+    padding: 20px;
+    font-size: 1rem;
+}
+
+.error {
+    color: #dc2626;
+    background-color: #fee2e2;
+    border-radius: 6px;
+}
+
+/* ✅ Status row coloring */
+.status-pending {
+    background-color: #fffbeb;
+}
+
+.status-completed {
+    background-color: #ecfdf5;
+}
+
+/* ✅ Summary Section Title */
+.transaction-summary-title {
+    margin-top: 40px;
+    font-size: 1.4rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* ✅ Small tweaks */
+.summary-table td {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.summary-table td:first-child {
+    color: #374151;
+}
