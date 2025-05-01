@@ -1,122 +1,148 @@
-// backend/routes/managerInfoRoutes.js (Renamed file)
-
 const express = require("express");
 const router = express.Router();
-const db = require("../../dbconn"); // Assuming promise-based
-const { param, query: queryParam, validationResult } = require('express-validator');
+const db = require("../../dbconn");
 
-// --- Helper: Validation Error Handler ---
-const handleValidationErrors = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        console.error("Validation Errors:", errors.array());
-        return res.status(400).json({
-            success: false,
-            error: {
-                message: "Validation failed.",
-                details: errors.array().map(err => ({ field: err.param, message: err.msg }))
-            }
-        });
-    }
-    next();
-};
 
-// --- Validation ---
-const hotelIdParamValidation = param('hotelId').optional().isInt({ gt: 0 }).withMessage('Valid Hotel ID parameter is required if provided.'); // Optional for routes listing all managers?
+router.post("/show-managers", (req, res) => {
 
-// --- Routes ---
 
-/**
- * @route   GET /api/managers
- * @desc    Get all active managers (optionally filter by hotel)
- * @query   hotelId (optional) - Filter managers by hotel
- * @query   name, email, phone (optional) - Filter by these fields
- * @access  Private (Admin role likely required)
- */
-router.get("/",
-    [ // Query param validations
-        queryParam('hotelId').optional().isInt({ gt: 0 }).withMessage('Invalid Hotel ID in query.'),
-        queryParam('name').optional().trim().isLength({ min: 1 }),
-        queryParam('email').optional().trim().isEmail(),
-        queryParam('phone').optional().trim().isLength({ min: 7 })
-    ],
-    handleValidationErrors,
-    async (req, res) => {
-        const { hotelId, name, email, phone } = req.query;
+    const query = `
+        SELECT 
+            e.EmpID, 
+            CONCAT(e.FirstName, ' ', e.LastName) AS FullName, 
+            e.hourly_pay, 
+            d.DeptName,
+            e.Email,
+            e.Phone,
+            e.HiredDate
+        FROM Employee e
+        INNER JOIN Department d ON e.DeptID = d.DeptID
+        WHERE e.working_status = 'Working' AND e.Role = 'manager';
+    `;
+    console.log(query);
 
-        let query = `
-            SELECT
-                e.EmpID,
-                e.FirstName,
-                e.LastName,
-                CONCAT(e.FirstName, ' ', e.LastName) AS FullName,
-                e.hourly_pay, -- Assuming managers might have hourly pay? Or Salary? Adjust as needed
-                d.DeptName,
-                d.HotelID, -- Include HotelID
-                h.Name as HotelName, -- Include Hotel Name
-                e.Email,
-                e.Phone,
-                e.HiredDate,
-                e.Address,
-                e.working_status
-            FROM Employee e
-            JOIN Department d ON e.DeptID = d.DeptID
-            JOIN Hotel h ON d.HotelID = h.HotelID -- Join Hotel to get name
-            WHERE e.working_status = 'Working' AND e.Role = 'manager' AND e.FirstName <> 'System'
-        `;
-        const params = [];
-
-        if (hotelId) {
-            query += " AND d.HotelID = ?";
-            params.push(hotelId);
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error("Error fetching employees:", err);
+            res.status(500).send("Error fetching employees.");
+        } else {
+            res.send(results);
         }
-        if (name) {
-            query += " AND CONCAT(e.FirstName, ' ', e.LastName) LIKE ?";
-            params.push(`%${name}%`);
-        }
-        if (email) {
-            query += " AND e.Email LIKE ?";
-            params.push(`%${email}%`);
-        }
-        if (phone) {
-            query += " AND e.Phone LIKE ?";
-            params.push(`%${phone}%`);
-        }
-
-        query += " ORDER BY h.Name, e.LastName, e.FirstName;";
-
-        try {
-            const results = await db.query(query, params);
-            res.json({ success: true, data: results });
-        } catch (err) {
-            console.error("Error fetching managers:", err);
-            res.status(500).json({ success: false, error: { message: "Database error fetching managers." } });
-        }
+    });
 });
 
 
-/**
- * @route   GET /api/managers/lookups/hotels
- * @desc    Get a simple list of all hotels (ID and Name)
- * @access  Private (Used for assigning managers, etc.)
- */
-router.get("/lookups/hotels", async (req, res) => {
-    // Consider filtering by status = 'active' if needed
-    const query = `SELECT HotelID, Name FROM Hotel ORDER BY Name ASC;`;
-    try {
-        const results = await db.query(query);
-        res.json({ success: true, data: results });
-    } catch (err) {
-        console.error("Error fetching hotel list:", err);
-        res.status(500).json({ success: false, error: { message: "Database error fetching hotels." } });
-    }
+router.post("/all-hotels", (req, res) => {
+
+    const query = `
+        SELECT HotelID, Name FROM Hotel;
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error("Error fetching departments:", err);
+            return res.status(500).send("Error fetching departments.");
+        }
+        res.send(results);
+    });
+});
+
+router.post("/find-departments", (req, res) => {
+    const { hotelID } = req.body;
+    console.log("hotelid from BE: ", hotelID);
+
+    const query = `
+        SELECT DeptID FROM department WHERE HotelID = ? AND DeptName = 'Maintenance';
+    `;
+
+    db.query(query, [hotelID], (err, results) => {
+        if (err) {
+            console.error("Error fetching departments:", err);
+            return res.status(500).send("Error fetching departments.");
+        }
+        // console.log("results from BE: ", results);
+        res.send(results);
+    });
+}
+);
+
+router.post("/remove-employee", (req, res) => {
+    const { empID } = req.body;
+
+    const query = `
+        UPDATE Employee
+        SET working_status = 'Not Working'
+        WHERE EmpID = ?;
+    `;
+
+    db.query(query, [empID], (err, result) => {
+        if (err) {
+            console.error("Error updating employee status:", err);
+            return res.status(500).send("Error updating employee status.");
+        }
+        res.send("Employee status updated successfully.");
+    });
 });
 
 
-// --- Removed Redundant Routes ---
-// POST /find-departments -> Use GET /api/employees/departments/:hotelID (or a general GET /api/departments/:hotelID)
-// POST /remove-employee -> Use DELETE /api/employees/:empID
-// POST /update-manager -> Use PUT /api/employees/update (Authorization middleware should handle permissions)
-// POST /filter-managers -> Integrated into GET /api/managers with query parameters
+router.post("/update-manager", (req, res) => {
+    const {
+        empID, firstName, lastName,
+        phone, email, hourlyPay,
+        hiredDate
+    } = req.body;
+
+    const updateQuery = `
+        UPDATE Employee
+        SET FirstName = ?, LastName = ?, Phone = ?, Email = ?,
+            hourly_pay = ?, HiredDate = ?
+        WHERE EmpID = ?
+    `;
+
+    db.query(updateQuery, [
+        firstName, lastName, phone, email,
+        hourlyPay, hiredDate, empID
+    ], (err, result) => {
+        if (err) {
+            console.error("Error updating manager:", err);
+            return res.status(500).send("Error updating manager.");
+        }
+        res.send("Manager updated successfully.");
+    });
+});
+router.post("/filter-managers", (req, res) => {
+    const { FullName, Email, Phone } = req.body;
+
+    let query = `
+        SELECT E.EmpID, CONCAT(E.FirstName, ' ', E.LastName) AS FullName,
+               D.DeptName, E.Email, E.Phone, E.hourly_pay, E.HiredDate
+        FROM Employee E
+        JOIN Department D ON E.DeptID = D.DeptID
+        WHERE E.Role = 'Manager' AND E.FirstName <> 'System'
+    `;
+    const params = [];
+
+    if (FullName) {
+        query += " AND CONCAT(E.FirstName, ' ', E.LastName) LIKE ?";
+        params.push(`%${FullName}%`);
+    }
+    if (Email) {
+        query += " AND E.Email LIKE ?";
+        params.push(`%${Email}%`);
+    }
+    if (Phone) {
+        query += " AND E.Phone LIKE ?";
+        params.push(`%${Phone}%`);
+    }
+
+    db.query(query, params, (err, results) => {
+        if (err) {
+            console.error("Error filtering managers:", err);
+            return res.status(500).send("Error filtering managers");
+        }
+        res.send(results);
+    });
+});
+
 
 module.exports = router;
