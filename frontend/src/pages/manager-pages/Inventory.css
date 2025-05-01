@@ -1,260 +1,398 @@
-/* Base Styles */
+/* --- START OF FILE Inventory.css --- */
+
+/* Assume :root variables from Checkout.css are available globally or copy them here */
+:root {
+  /* Copy the full :root definition from previous examples if not global */
+  --primary-color: #38bdf8;
+  --primary-glow: rgba(56, 189, 248, 0.3);
+  --secondary-color: #2dd4bf;
+  --secondary-glow: rgba(45, 212, 191, 0.3);
+  --accent-color: #a78bfa;
+  --accent-glow: rgba(167, 139, 250, 0.3);
+  --background-dark: #111827;
+  --surface-color: rgba(31, 41, 55, 0.6);
+  --surface-border: rgba(75, 85, 99, 0.4);
+  --surface-hover-border: rgba(56, 189, 248, 0.5);
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --glow-shadow: 0 0 15px;
+  --font-family: 'Poppins', sans-serif;
+  --border-radius-lg: 16px;
+  --border-radius-md: 10px;
+  --border-radius-sm: 8px;
+  --transition-speed: 0.3s;
+  --transition-timing: ease;
+  --danger-color: #f43f5e;
+  --danger-glow: rgba(244, 63, 94, 0.3);
+  --success-color: #22c55e;
+  --success-glow: rgba(34, 197, 94, 0.3);
+  --warning-color: #f59e0b;
+  --warning-glow: rgba(245, 158, 11, 0.3);
+}
+
 .inventory-app {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    background-color: #f5f7fa;
-    min-height: 100vh;
-  
-  }
-  
-  .inventory-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Header Styles */
-  .inventory-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .inventory-header h1 {
-    color: #2c3e50;
-    margin: 0;
-    font-size: 28px;
-  }
-  
-  .header-actions {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-  }
-  
-  .refresh-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  
-  .refresh-btn:hover {
-    background-color: #2980b9;
-  }
-  
-  .refresh-btn:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-  }
-  
-  .search-box {
-    position: relative;
-  }
-  
-  .search-box input {
-    padding: 8px 30px 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 200px;
-  }
-  
-  .search-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #7f8c8d;
-  }
-  
-  /* Content Layout */
-  .inventory-content {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 30px;
-  }
-  
-  @media (max-width: 900px) {
-    .inventory-content {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  /* Section Headers */
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .section-header h2 {
-    margin: 0;
-    font-size: 20px;
-    color: #34495e;
-  }
-  
-  .item-count {
-    background-color: #ecf0f1;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 14px;
-    color: #7f8c8d;
-  }
-  
-  /* Table Styles */
-  .table-container {
-    overflow-x: auto;
-  }
-  
-  .inventory-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .inventory-table th {
-    background-color: #34495e;
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: 500;
-  }
-  
-  .inventory-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ecf0f1;
-  }
-  
-  .inventory-table tr:last-child td {
-    border-bottom: none;
-  }
-  
-  .inventory-table tr:hover {
-    background-color: #f8f9fa;
-  }
-  
-  .id-cell {
-    font-weight: 500;
-    color: #7f8c8d;
-  }
-  
-  .name-cell {
-    font-weight: 500;
-  }
-  
-  .quantity-cell {
-    font-weight: bold;
-  }
-  
-  .quantity-cell.low-stock {
-    color: #e74c3c;
-  }
-  
-  .date-cell {
-    color: #7f8c8d;
-    font-size: 14px;
-  }
-  
-  .no-items {
-    text-align: center;
-    padding: 20px;
-    color: #7f8c8d;
-    font-style: italic;
-  }
-  
-  /* Order Form Styles */
-  .order-section {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    height: fit-content;
-    position: sticky;
-    top: 20px;
-  }
-  
-  .order-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .form-group label {
-    font-weight: 500;
-    color: #34495e;
-    font-size: 14px;
-  }
-  
-  .form-group input {
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  .form-group input:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-  }
-  
-  .form-row {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .form-row .form-group {
-    flex: 1;
-  }
-  
-  .submit-order-btn {
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 4px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 10px;
-  }
-  
-  .submit-order-btn:hover {
-    background-color: #27ae60;
-  }
-  
-  /* Loading and Error States */
-  .loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    color: #7f8c8d;
-  }
-  
-  .error-message {
-    color: #e74c3c;
-    background-color: #fdecea;
-    padding: 15px;
-    border-radius: 4px;
-    text-align: center;
-  }
+min-height: 100vh;
+background-color: var(--background-dark);
+color: var(--text-secondary);
+font-family: var(--font-family);
+}
+
+.inventory-container {
+padding: 2.5rem 4rem; /* Consistent padding */
+max-width: 1600px; /* Wider content */
+margin: 0 auto;
+}
+
+/* === Header Section === */
+.inventory-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2.5rem;
+flex-wrap: wrap;
+gap: 1.5rem;
+}
+.inventory-header h1 {
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Themed Buttons */
+.refresh-btn, .add-item-btn, .submit-order-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.6rem;
+padding: 0.8rem 1.8rem;
+border: 1px solid transparent;
+border-radius: var(--border-radius-md);
+cursor: pointer;
+font-weight: 600;
+font-size: 0.9rem;
+transition: all var(--transition-speed) var(--transition-timing);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+white-space: nowrap;
+}
+
+.refresh-btn { /* Accent */
+background-color: var(--accent-color);
+color: var(--text-primary);
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--accent-glow);
+}
+.refresh-btn:hover:not(:disabled) {
+background-color: color-mix(in srgb, var(--accent-color) 90%, white);
+transform: translateY(-3px) scale(1.03);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-glow);
+}
+
+.add-item-btn { /* Primary Gradient */
+background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+color: var(--background-dark);
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--primary-glow);
+}
+.add-item-btn:hover:not(:disabled) {
+transform: translateY(-3px) scale(1.03);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
+filter: brightness(1.15);
+}
+
+/* Search Box */
+.search-box {
+  position: relative;
+}
+.search-box input {
+  padding: 0.8rem 2.5rem 0.8rem 1.2rem; /* Space for icon */
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius-md);
+  min-width: 250px;
+  font-size: 0.95rem;
+  background-color: rgba(17, 24, 39, 0.6);
+  color: var(--text-primary);
+  transition: all var(--transition-speed) ease;
+}
+.search-box input::placeholder { color: var(--text-muted); }
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  background-color: rgba(17, 24, 39, 0.9);
+}
+.search-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  pointer-events: none; /* Prevent icon blocking input click */
+}
+
+
+/* === KPI Section === */
+.kpi-section {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1.5rem;
+margin-bottom: 3rem;
+}
+.kpi-card { /* Re-use stat-card styling if suitable, or define new */
+background-color: var(--surface-color);
+padding: 1.5rem;
+border-radius: var(--border-radius-md);
+box-shadow: 0 5px 15px var(--shadow-color);
+border: 1px solid var(--surface-border);
+backdrop-filter: blur(10px);
+display: flex;
+align-items: center; /* Align icon and text */
+gap: 1rem;
+}
+.kpi-icon {
+  font-size: 2rem;
+  padding: 0.8rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+/* Example icon colors */
+.kpi-icon.total-items { background-color: rgba(56, 189, 248, 0.1); color: var(--primary-color); }
+.kpi-icon.low-stock { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+.kpi-icon.total-value { background-color: rgba(34, 197, 94, 0.1); color: var(--success-color); }
+
+.kpi-info h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.kpi-info p {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* === Content Layout === */
+.inventory-content {
+  display: grid;
+  grid-template-columns: 1fr 380px; /* Main table + sidebar */
+  gap: 2.5rem;
+}
+@media (max-width: 1024px) {
+  .inventory-content { grid-template-columns: 1fr; } /* Stack on smaller screens */
+}
+
+/* Section Headers */
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 1.5rem;
+padding-bottom: 1rem;
+border-bottom: 1px solid var(--surface-border);
+}
+.section-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.section-header h2 .header-icon {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+.item-count { /* Count badge */
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* === Table Styling === */
+.table-container {
+background-color: var(--surface-color);
+border-radius: var(--border-radius-lg);
+box-shadow: 0 8px 30px var(--shadow-color);
+overflow: hidden;
+border: 1px solid var(--surface-border);
+backdrop-filter: blur(12px);
+overflow-x: auto;
+}
+
+.inventory-table {
+width: 100%;
+border-collapse: collapse;
+min-width: 900px; /* Adjust as needed */
+}
+/* Use themed table styles from Employee.css */
+.inventory-table th,
+.inventory-table td {
+padding: 1rem 1.2rem;
+text-align: left;
+border-bottom: 1px solid var(--surface-border);
+white-space: nowrap;
+vertical-align: middle;
+}
+.inventory-table th {
+background-color: rgba(0,0,0, 0.15);
+color: var(--text-primary);
+font-weight: 600;
+font-size: 0.8rem;
+text-transform: uppercase;
+letter-spacing: 0.8px;
+position: sticky; top: 0; z-index: 10;
+}
+.inventory-table tbody tr { transition: background-color 0.2s ease; }
+.inventory-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.05); }
+.inventory-table td { font-size: 0.95rem; color: var(--text-secondary); }
+
+/* Specific Cell Styles */
+.id-cell { font-weight: 500; color: var(--text-muted); }
+.name-cell { font-weight: 500; color: var(--text-primary); } /* Make name primary */
+.quantity-cell { font-weight: 600; }
+.quantity-cell.low-stock { color: var(--warning-color); font-weight: 700; }
+.date-cell { color: var(--text-muted); font-size: 0.85rem; }
+
+/* Action Buttons in Table */
+.action-buttons { display: flex; gap: 0.6rem; align-items: center; }
+.action-buttons button {
+  padding: 0.5rem 0.8rem; /* Smaller buttons */
+  font-size: 0.75rem;
+  border-radius: var(--border-radius-sm);
+  /* Reuse button styles by class */
+}
+.edit-btn { /* Example */
+  background-color: var(--accent-color); color: var(--text-primary);
+}
+.adjust-btn { /* Example */
+   background-color: var(--secondary-color); color: var(--background-dark);
+}
+
+.no-items td { /* Style for no items row */
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+
+/* === Order Form Section (Sidebar) === */
+.order-section {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 30px var(--shadow-color);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(12px);
+  height: fit-content; /* Adjust height as needed */
+  position: sticky; top: 2rem; /* Make it sticky */
+}
+
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Increased gap */
+}
+/* Reuse form styling from Employee.css */
+.form-group { position: relative; }
+.form-group label { display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.6rem; font-weight: 500; }
+.form-group input {
+  width: 100%; padding: 0.9rem 1.2rem; border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius-sm); font-size: 1rem;
+  background-color: rgba(17, 24, 39, 0.6); color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+.form-group input::placeholder { color: var(--text-muted); }
+.form-group input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--primary-glow); background-color: rgba(17, 24, 39, 0.9); }
+.form-group input.error { border-color: var(--danger-color); box-shadow: 0 0 0 3px var(--danger-glow); }
+.error-message { color: #f87171; font-size: 0.8rem; margin-top: 0.4rem; display: block; }
+
+.form-row { display: flex; gap: 1rem; }
+.form-row .form-group { flex: 1; }
+
+.submit-order-btn { /* Style like Success button */
+  background-color: var(--success-color);
+  color: var(--background-dark);
+  margin-top: 1rem; /* Space above button */
+  width: 100%; /* Full width */
+}
+.submit-order-btn:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--success-color) 90%, white);
+  box-shadow: 0 0 10px var(--success-glow);
+  transform: translateY(-2px);
+}
+
+/* === Add Item Modal Styling === */
+/* Reuse modal styles from Employee.css */
+.popup-overlay { position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.85); z-index: 999; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px); opacity: 0; animation: fadeIn 0.4s ease forwards; }
+.add-item-modal {
+background: var(--surface-color); backdrop-filter: blur(15px); padding: 2.5rem 3rem;
+border-radius: var(--border-radius-lg); width: 90%; max-width: 600px; /* Wider modal */
+box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4); z-index: 1000; border: 1px solid var(--surface-border);
+transform: scale(0.95); opacity: 0; animation: fadeInScale 0.4s ease-out 0.1s forwards;
+color: var(--text-secondary); max-height: 90vh; overflow-y: auto;
+}
+.add-item-modal .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--surface-border); }
+.add-item-modal .modal-header h3 { color: var(--text-primary); font-size: 1.6rem; margin: 0; font-weight: 600; }
+.add-item-modal .close-button { background: none; border: none; font-size: 1.8rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem; line-height: 1; transition: color 0.2s; }
+.add-item-modal .close-button:hover { color: var(--danger-color); }
+.add-item-modal .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+/* Reuse .input-group styling */
+.add-item-modal .modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--surface-border); }
+/* Reuse .save-button and .cancel-button styles */
+
+
+/* Loading and Error States */
+.loading-spinner, .error-message-container {
+display: flex; justify-content: center; align-items: center;
+padding: 3rem; text-align: center; color: var(--text-muted);
+}
+.spinner { width: 35px; height: 35px; border: 4px solid rgba(249, 250, 251, 0.2); border-top-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem;}
+.error-message {
+  background-color: rgba(244, 63, 94, 0.1); /* Danger subtle bg */
+  color: #fca5a5; /* Lighter red text */
+  padding: 1rem 1.5rem; border-radius: var(--border-radius-md);
+  border: 1px solid var(--danger-color);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.error-message .error-icon { font-size: 1.5rem; color: var(--danger-color); }
+
+
+/* Animations */
+@keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inventory-container { padding: 2rem 1.5rem; }
+  .inventory-header { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .header-actions { flex-direction: column; align-items: stretch; }
+  .search-box input { min-width: unset; width: 100%; }
+  .kpi-section { grid-template-columns: 1fr; } /* Stack KPIs */
+  .order-section { position: static; margin-top: 2rem; } /* Unstick sidebar */
+}
+@media (max-width: 480px) {
+   .inventory-container { padding: 1.5rem 1rem; }
+   .add-item-modal .form-grid { grid-template-columns: 1fr; }
+   .add-item-modal .modal-actions { flex-direction: column; }
+   .add-item-modal .modal-actions button { width: 100%; }
+}
+
+/* --- END OF FILE Inventory.css --- */

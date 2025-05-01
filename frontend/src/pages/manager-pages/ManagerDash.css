@@ -1,99 +1,316 @@
-.dashboard-wrapper {
-    min-height: 100vh;
-    background: #f8fafc;
-    padding-bottom: 2rem;
+/* --- START OF FILE ManagerDash.css --- */
 
+/* Assume :root variables from Checkout.css are available globally or copy them here */
+:root {
+    /* Copy the full :root definition from previous examples if not global */
+    --primary-color: #38bdf8;
+    --primary-glow: rgba(56, 189, 248, 0.3);
+    --secondary-color: #2dd4bf;
+    --secondary-glow: rgba(45, 212, 191, 0.3);
+    --accent-color: #a78bfa;
+    --accent-glow: rgba(167, 139, 250, 0.3);
+    --background-dark: #111827;
+    --surface-color: rgba(31, 41, 55, 0.6);
+    --surface-border: rgba(75, 85, 99, 0.4);
+    --surface-hover-border: rgba(56, 189, 248, 0.5);
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --glow-shadow: 0 0 15px;
+    --font-family: 'Poppins', sans-serif;
+    --border-radius-lg: 16px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 8px;
+    --transition-speed: 0.3s;
+    --transition-timing: ease;
+    --danger-color: #f43f5e; /* For alerts */
+    --warning-color: #f59e0b; /* For warnings */
+}
+
+.dashboard-wrapper {
+  min-height: 100vh;
+  background-color: var(--background-dark);
+  color: var(--text-secondary);
+  padding-bottom: 3rem; /* Add padding at the bottom */
 }
 
 .dashboard-container {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
+  padding: 2.5rem 4rem; /* Consistent padding */
+  max-width: 1600px; /* Wider max-width */
+  margin: 0 auto;
 }
 
+/* === Dashboard Header === */
 .dashboard-header {
-    margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .dashboard-title {
-    color: #1e293b;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    font-weight: 600;
+  color: var(--text-primary);
+  font-size: 2rem; /* Slightly smaller title */
+  font-weight: 600;
+  margin: 0;
 }
 
+/* Optional: Date Range Selector Placeholder */
+.date-range-selector {
+    /* Style your date range component here */
+    /* Example placeholder style: */
+    padding: 0.6rem 1rem;
+    background-color: var(--surface-color);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius-md);
+    color: var(--text-secondary);
+}
+
+
+/* === KPI Stats Section === */
 .stats-container {
+  display: grid;
+  /* Responsive grid for KPIs */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem; /* Space below KPIs */
+}
+
+/* Individual KPI Card */
+.stat-card {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md); /* Slightly smaller radius */
+  box-shadow: 0 5px 15px var(--shadow-color);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all var(--transition-speed) var(--transition-timing);
+}
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: var(--surface-hover-border);
+}
+
+.stat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+}
+.stat-card-header h3 { /* KPI Title */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.stat-card-header .stat-icon {
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+.stat-card .stat-value { /* The main number */
+  color: var(--text-primary);
+  font-size: 1.8rem; /* Larger number */
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.stat-card .stat-trend { /* Trend indicator (+5%, -2%) */
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    display: inline-block; /* Fit content */
+}
+.stat-card .stat-trend.positive {
+    color: #16a34a; /* Green */
+    background-color: rgba(22, 163, 74, 0.1);
+}
+.stat-card .stat-trend.negative {
+    color: #dc2626; /* Red */
+    background-color: rgba(220, 38, 38, 0.1);
+}
+.stat-card .stat-trend.neutral {
+    color: var(--text-muted);
+     background-color: rgba(107, 114, 128, 0.1);
+}
+
+
+/* === Main Dashboard Layout (Example: 2 Columns) === */
+.dashboard-main-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 2fr 1fr; /* Example: 2/3 for charts, 1/3 for nav/alerts */
+    gap: 2.5rem;
     margin-bottom: 3rem;
 }
 
-.stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    border: 1px solid #e2e8f0;
+/* Sections within main content */
+.dashboard-section {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 8px 30px var(--shadow-color);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(12px);
 }
 
-.stat-card h3 {
-    color: #64748b;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.stat-card p {
-    color: #1e293b;
-    font-size: 1.5rem;
+.dashboard-section-title {
+    color: var(--text-primary);
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--surface-border);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.dashboard-section-title .title-icon {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    color: var(--primary-color); /* Example color */
 }
 
-.stat-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 500;
+
+/* Chart Container Placeholder */
+.chart-container {
+    min-height: 300px; /* Ensure charts have space */
+    margin-bottom: 2rem;
+    /* Styles for chart canvas parent */
+}
+.chart-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    border: 2px dashed var(--surface-border);
+    border-radius: var(--border-radius-md);
+    color: var(--text-muted);
 }
 
-.stat-badge.success {
-    background: #dcfce7;
-    color: #16a34a;
+
+/* Activity/Alerts List Styling */
+.activity-list, .alerts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 350px; /* Limit height and allow scroll */
+    overflow-y: auto;
+}
+.activity-list li, .alerts-list li {
+    padding: 0.8rem 0.5rem;
+    border-bottom: 1px solid var(--surface-border);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+}
+.activity-list li:last-child, .alerts-list li:last-child {
+    border-bottom: none;
 }
 
-.stat-badge.warning {
-    background: #fff4e6;
-    color: #ea580c;
+.activity-list .item-icon, .alerts-list .item-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.activity-list .item-icon.check-in { color: var(--secondary-color); }
+.activity-list .item-icon.check-out { color: var(--accent-color); }
+.alerts-list .item-icon.low-stock { color: var(--warning-color); }
+.alerts-list .item-icon.urgent { color: var(--danger-color); }
+
+.activity-list .item-time, .alerts-list .item-time {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
 }
 
-.grid-container {
+
+/* === Navigation Cards Grid (Right Column) === */
+/* Use the existing grid-container class but potentially override columns */
+.navigation-grid { /* New class for clarity */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4rem;
+    grid-template-columns: 1fr; /* Example: 1 column in the sidebar */
+    gap: 1.5rem; /* Smaller gap */
 }
 
-@media (max-width: 1024px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
+/* DashboardCard component styling (ensure consistency) */
+/* If DashboardCard is a separate component, its CSS should use these variables/styles */
+.dashboard-card { /* Applied to the card component root */
+  background-color: rgba(31, 41, 55, 0.7); /* Slightly different surface maybe */
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-timing);
+  box-shadow: 0 5px 15px var(--shadow-color);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(10px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), var(--glow-shadow) var(--primary-glow);
+  border-color: var(--primary-color);
+}
+.dashboard-card .card-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;}
+.dashboard-card .card-icon { font-size: 1.5rem; opacity: 0.8; flex-shrink: 0;}
+.dashboard-card h3 { color: var(--text-primary); font-size: 1.1rem; font-weight: 600; margin: 0; }
+.dashboard-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1; }
+.dashboard-card .card-stat { font-size: 0.8rem; color: var(--text-muted); margin-top: auto; padding-top: 0.5rem; border-top: 1px solid var(--surface-border); }
+/* Button inside card - if needed */
+.dashboard-card .nav-button { /* Example if you add explicit buttons */
+    /* Style like other buttons but maybe smaller */
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    align-self: flex-start;
+    /* Reuse gradient/color styles */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--background-dark);
+}
 
-    .dashboard-title {
-        font-size: 2rem;
+
+/* === Responsive Adjustments === */
+@media (max-width: 1200px) {
+    .dashboard-main-content {
+        grid-template-columns: 1fr; /* Stack columns */
     }
 }
 
 @media (max-width: 768px) {
-    .dashboard-container {
-        padding: 1.5rem;
-    }
+  .dashboard-container {
+    padding: 2rem 1.5rem;
+  }
+  .stats-container {
+     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust minmax */
+     gap: 1rem;
+  }
+  .stat-card { padding: 1rem; }
+  .stat-card .stat-value { font-size: 1.5rem; }
 
-    .stats-container {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-card p {
-        font-size: 1.25rem;
-    }
+  .dashboard-main-content { gap: 1.5rem; }
+  .dashboard-section { padding: 1.5rem; }
+  .dashboard-section-title { font-size: 1.1rem; }
 }
+
+@media (max-width: 480px) {
+  .dashboard-container { padding: 1.5rem 1rem; }
+  .dashboard-title { font-size: 1.5rem; }
+  .stats-container { grid-template-columns: 1fr; } /* Stack KPIs fully */
+  .dashboard-card h3 { font-size: 1rem; }
+  .dashboard-card p { font-size: 0.85rem; }
+}
+
+
+/* --- END OF FILE ManagerDash.css --- */

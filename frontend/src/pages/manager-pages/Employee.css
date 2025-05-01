@@ -1,355 +1,506 @@
-.employee-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #f8fafc;
+/* --- START OF FILE Employee.css --- */
 
+/* Assume :root variables from Checkout.css are available globally or copy them here */
+:root {
+    /* Copy the full :root definition from previous examples if not global */
+    --primary-color: #38bdf8;
+    --primary-glow: rgba(56, 189, 248, 0.3);
+    --secondary-color: #2dd4bf;
+    --secondary-glow: rgba(45, 212, 191, 0.3);
+    --accent-color: #a78bfa;
+    --accent-glow: rgba(167, 139, 250, 0.3);
+    --background-dark: #111827;
+    --surface-color: rgba(31, 41, 55, 0.6);
+    --surface-border: rgba(75, 85, 99, 0.4);
+    --surface-hover-border: rgba(56, 189, 248, 0.5);
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --glow-shadow: 0 0 15px;
+    --font-family: 'Poppins', sans-serif;
+    --border-radius-lg: 16px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 8px;
+    --transition-speed: 0.3s;
+    --transition-timing: ease;
+    --danger-color: #f43f5e;
+    --danger-glow: rgba(244, 63, 94, 0.3);
+    --success-color: #22c55e;
+    --success-glow: rgba(34, 197, 94, 0.3);
+    --warning-color: #f59e0b;
+}
+
+.employee-container {
+  min-height: 100vh;
+  background-color: var(--background-dark);
+  color: var(--text-secondary);
 }
 
 .content-wrapper {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    flex-grow: 1;
+  padding: 2.5rem 4rem; /* Consistent padding */
+  max-width: 1600px; /* Allow wider content */
+  margin: 0 auto;
+  flex-grow: 1;
 }
 
+/* === Header Section === */
 .header-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.header-section h1 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
 }
 
+/* Consistent Button Styles */
+.add-button, .filter-button, .save-button, .cancel-button, .confirm-button, .update-button, .remove-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) var(--transition-timing);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Primary Button (Add New) */
 .add-button {
-    background-color: #3B82F6;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--background-dark);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--primary-glow);
 }
-
-
 .add-button:hover {
-    background-color: #2563eb;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
+  filter: brightness(1.15);
 }
 
+/* Secondary/Outline Button (Filter) */
+.filter-button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: calc(0.8rem - 1px) calc(1.8rem - 1px); /* Adjust padding for border */
+}
+.filter-button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-dark);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+
+/* === Table Styling === */
 .table-container {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    margin: 1rem 0;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 30px var(--shadow-color);
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(12px);
+  margin: 2rem 0; /* Add vertical margin */
+  overflow-x: auto; /* Enable horizontal scroll */
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
+.employee-table { /* Target specific table */
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px; /* Ensure minimum width */
 }
 
-th, td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
+.employee-table th,
+.employee-table td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-border);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-th {
-    background-color: #3B82F6;
-    color: white;
-    font-weight: bold;
+.employee-table th {
+  background-color: rgba(0,0,0, 0.15);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-tr:hover {
-    background-color: #f8fafc;
+.employee-table tbody tr {
+   transition: background-color 0.2s ease;
+}
+.employee-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.employee-table td {
+    font-size: 0.95rem;
 }
 
+/* Inline Editing Styles */
+.employee-table td input,
+.employee-table td select {
+    width: 100%; /* Take full cell width */
+    padding: 0.5rem 0.8rem; /* Adjust padding */
+    border: 1px solid var(--primary-color); /* Highlight editable fields */
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    background-color: rgba(17, 24, 39, 0.8); /* Darker input background */
+    color: var(--text-primary);
+    box-shadow: 0 0 0 2px var(--primary-glow);
+}
+.employee-table td input:focus,
+.employee-table td select:focus {
+    outline: none;
+}
+
+
+/* Status Badge Styles */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+}
+.status-badge.working {
+    background-color: rgba(34, 197, 94, 0.15); /* success color */
+    color: #4ade80;
+}
+.status-badge.inactive,
+.status-badge.not.working { /* Handle variation */
+     background-color: rgba(244, 63, 94, 0.15); /* danger color */
+     color: #f87171;
+}
+
+
+/* Action Buttons within Table */
+.action-buttons {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+.action-buttons button { /* Apply base styles to all action buttons */
+    padding: 0.5rem 1rem; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font */
+    border-radius: var(--border-radius-sm);
+}
+/* Specific button styles */
+.update-button { /* Accent */
+    background-color: var(--accent-color);
+    color: var(--text-primary);
+}
+.update-button:hover { background-color: color-mix(in srgb, var(--accent-color) 90%, white); box-shadow: 0 0 8px var(--accent-glow); }
+
+.save-button { /* Success */
+    background-color: var(--success-color);
+    color: var(--background-dark);
+}
+.save-button:hover { background-color: color-mix(in srgb, var(--success-color) 90%, white); box-shadow: 0 0 8px var(--success-glow); }
+
+.cancel-button { /* Muted/Gray */
+    background-color: rgba(75, 85, 99, 0.5);
+    color: var(--text-secondary);
+    border: 1px solid var(--surface-border);
+    padding: calc(0.5rem - 1px) calc(1rem - 1px); /* Adjust for border */
+}
+.cancel-button:hover { background-color: rgba(107, 114, 128, 0.6); color: var(--text-primary); }
+
+.remove-button { /* Danger */
+    background-color: var(--danger-color);
+    color: var(--text-primary);
+}
+.remove-button:hover { background-color: color-mix(in srgb, var(--danger-color) 90%, white); box-shadow: 0 0 8px var(--danger-glow); }
+
+
+/* === Pagination Controls === */
 .pagination-controls {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     display: flex;
     gap: 1rem;
     align-items: center;
     justify-content: center;
-    background: white;
-    border-top: 1px solid #e2e8f0;
+    background-color: rgba(0,0,0, 0.1); /* Match table header background */
+    border-top: 1px solid var(--surface-border);
+    border-bottom-left-radius: var(--border-radius-lg); /* Match container radius */
+    border-bottom-right-radius: var(--border-radius-lg);
 }
 
 .pagination-controls button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 4px;
-    background: white;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius-sm);
+    background: var(--surface-color); /* Match surface */
+    color: var(--text-secondary);
     cursor: pointer;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
 }
-
+.pagination-controls button:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+}
 .pagination-controls button:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
 }
+.pagination-controls span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
 
+
+/* === Add Employee Form === */
 .add-employee-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-top: 2rem;
-    animation: slideIn 0.3s ease-out;
+    background: var(--surface-color);
+    padding: 2.5rem 3rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 40px var(--shadow-color);
+    margin-top: 2.5rem;
+    animation: slideIn 0.4s ease-out;
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(15px);
 }
 
 .form-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--surface-border);
 }
 
 .form-header h3 {
-    color: #1e293b;
-    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.6rem;
     margin: 0;
+    font-weight: 600;
 }
 
-.close-button {
+.close-button { /* Form close button */
     background: none;
     border: none;
-    font-size: 1.5rem;
-    color: #64748b;
+    font-size: 1.8rem; /* Larger icon */
+    color: var(--text-muted);
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.2rem;
     line-height: 1;
     transition: color 0.2s;
 }
-
 .close-button:hover {
-    color: #475569;
+    color: var(--danger-color); /* Red on hover */
 }
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+    gap: 1.5rem 2rem; /* Row and column gap */
+    margin-bottom: 2rem;
 }
 
+/* Input Group Styling (Consistent) */
 .input-group {
-    position: relative;
+    position: relative; /* For potential absolute error messages */
 }
-
 .input-group label {
     display: block;
-    color: #475569;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
     font-weight: 500;
 }
-
 .input-group input,
 .input-group select {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
+    padding: 0.9rem 1.2rem; /* Match other inputs */
+    border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius-sm);
     font-size: 1rem;
+    background-color: rgba(17, 24, 39, 0.6); /* Darker input bg */
+    color: var(--text-primary);
     transition: all 0.2s ease;
-    background: #f8fafc;
 }
+.input-group input::placeholder { color: var(--text-muted); }
 
 .input-group input:focus,
 .input-group select:focus {
     outline: none;
-    border-color: #3B82F6;
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+    background-color: rgba(17, 24, 39, 0.9); /* Slightly darker on focus */
 }
+.input-group input[type="date"] { color-scheme: dark; }
 
+/* Error Styling */
 .input-group input.error,
 .input-group select.error {
-    border-color: #ef4444;
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px var(--danger-glow);
 }
-
 .error-message {
-    color: #ef4444;
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
+    color: #f87171; /* Lighter red for dark bg */
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
     display: block;
 }
 
+/* Form Actions */
 .form-actions {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-    padding-top: 1.5rem;
-    border-top: 1px solid #f1f5f9;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--surface-border);
+}
+/* Use themed buttons */
+.form-actions .save-button { /* Matches Success button style */
+     background-color: var(--success-color);
+     color: var(--background-dark);
+     padding: 0.8rem 1.8rem; /* Standard button padding */
+}
+.form-actions .save-button:hover { background-color: color-mix(in srgb, var(--success-color) 90%, white); box-shadow: 0 0 8px var(--success-glow); }
+
+.form-actions .cancel-button { /* Matches Muted/Gray button style */
+     background-color: rgba(75, 85, 99, 0.5);
+     color: var(--text-secondary);
+     border: 1px solid var(--surface-border);
+     padding: calc(0.8rem - 1px) calc(1.8rem - 1px); /* Adjust for border */
+}
+.form-actions .cancel-button:hover { background-color: rgba(107, 114, 128, 0.6); color: var(--text-primary); }
+
+
+/* === Confirmation Popup & Filter Modal (Themed Modal Style) === */
+.popup-overlay { /* Use one overlay class */
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.85);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
 }
 
-.save-button {
-    background-color: #3B82F6;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
+.confirmation-popup, /* Specific class if needed */
+.filter-modal { /* Specific class if needed */
+  background: var(--surface-color);
+  backdrop-filter: blur(15px);
+  padding: 2.5rem 3rem;
+  border-radius: var(--border-radius-lg);
+  width: 90%;
+  max-width: 480px; /* Consistent max-width */
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  border: 1px solid var(--surface-border);
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeInScale 0.4s ease-out 0.1s forwards;
+  color: var(--text-secondary); /* Ensure text color */
 }
 
-.save-button:hover {
-    background-color: #2563eb;
+.confirmation-popup h3, .filter-modal h3 { /* Modal Title */
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.4rem;
 }
-
-.cancel-button {
-    background-color: #ffffff;
-    color: #64748b;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-
-/* .cancel-button:hover {
-    border-color: #cbd5e1;
-    background-color: #f8fafc;
-} */
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.confirmation-popup {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 999;
-}
-
-.confirmation-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
+.confirmation-popup p {
     text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.6;
 }
 
-.confirmation-buttons {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+/* Filter Modal Input Styling (reuse form styles) */
+.filter-modal .input-group { margin-bottom: 1rem; }
+.filter-modal label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary); }
+.filter-modal input, .filter-modal select { width: 100%; padding: 0.8rem 1rem; /* Adjust padding */ }
+
+
+/* Modal Actions/Buttons */
+.confirmation-buttons, .filter-actions {
+  display: flex;
+  justify-content: center; /* Center confirmation buttons */
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.filter-actions { justify-content: flex-end; /* Align filter buttons right */}
+
+.confirmation-buttons button, .filter-actions button {
+  /* Reuse base button style */
+  flex: 0 1 auto; /* Don't grow excessively */
+  min-width: 100px; /* Minimum width */
+}
+/* Specific Confirmation Buttons */
+.confirmation-buttons .confirm-button { /* Danger */
+    background-color: var(--danger-color);
+    color: var(--text-primary);
+}
+.confirmation-buttons .confirm-button:hover { background-color: color-mix(in srgb, var(--danger-color) 90%, white); box-shadow: 0 0 8px var(--danger-glow); }
+.confirmation-buttons .cancel-button { /* Muted/Gray */
+     background-color: rgba(75, 85, 99, 0.5);
+     color: var(--text-secondary);
+     border: 1px solid var(--surface-border);
+      padding: calc(0.8rem - 1px) calc(1.8rem - 1px);
+}
+.confirmation-buttons .cancel-button:hover { background-color: rgba(107, 114, 128, 0.6); color: var(--text-primary); }
+
+/* Specific Filter Buttons */
+.filter-actions button:first-child { /* Apply button (Primary Gradient) */
+     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+     color: var(--background-dark);
+}
+.filter-actions button:first-child:hover { filter: brightness(1.15); box-shadow: 0 0 10px var(--primary-glow); transform: translateY(-1px); }
+.filter-actions button:last-child { /* Cancel button (Muted/Gray) */
+    background-color: rgba(75, 85, 99, 0.5);
+    color: var(--text-secondary);
+    border: 1px solid var(--surface-border);
+     padding: calc(0.8rem - 1px) calc(1.8rem - 1px);
+}
+.filter-actions button:last-child:hover { background-color: rgba(107, 114, 128, 0.6); color: var(--text-primary); }
+
+
+/* Animations */
+@keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content-wrapper { padding: 2rem 1.5rem; }
+    .header-section { flex-direction: column; align-items: stretch; text-align: center; }
+    .add-button, .filter-button { width: 100%; }
+    .form-grid { grid-template-columns: 1fr; } /* Stack form inputs */
+    .add-employee-form, .filter-modal, .confirmation-popup { padding: 2rem 1.5rem; }
+}
+@media (max-width: 480px) {
+    .content-wrapper { padding: 1.5rem 1rem; }
+    .pagination-controls { flex-direction: column; gap: 0.5rem; }
+    .confirmation-buttons, .filter-actions { flex-direction: column; }
+    .confirmation-buttons button, .filter-actions button { width: 100%; }
 }
 
-.confirm-button {
-    background-color: red;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.cancel-button {
-    background-color: blue;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-}
-
-
-.update-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.save-button {
-    background-color: #2196f3;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="text"], input[type="number"], input[type="date"], select {
-    padding: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-
-.action-buttons {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-}
-
-.cancel-button {
-    background-color: #f44336;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-
-
-.filter-modal {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    z-index: 1000;
-    width: 300px;
-}
-
-.filter-modal h3 {
-    margin-bottom: 15px;
-}
-
-.filter-modal label {
-    display: block;
-    margin-top: 10px;
-}
-
-.filter-modal input, .filter-modal select {
-    width: 100%;
-    padding: 6px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.filter-actions {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.filter-button {
-    margin-left: 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
+/* --- END OF FILE Employee.css --- */
