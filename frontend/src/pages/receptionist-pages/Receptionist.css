@@ -1,493 +1,198 @@
-/* --- START OF FILE Receptionist.css --- */
-
-/* Assume :root variables from Checkout.css are available globally or copy them here */
-
+/* Container */
+/* Container with Background Image */
 .receptionist-container {
-  min-height: calc(100vh - 60px); /* Adjust based on Navbar height */
-  background-color: var(--background-dark);
-  color: var(--text-secondary);
-  padding: 2.5rem 4rem;
-  box-sizing: border-box;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  
+  /* 🔥 Background image added */
+  min-height: 100vh;
+
+  
+
 }
 
-/* === Top Button Group === */
+/* Everything else same */
+
 .button-group {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 2.5rem;
-  gap: 1rem;
-  flex-wrap: wrap; /* Allow wrapping */
+  margin-bottom: 20px;
+  gap: 10px;
 }
 
-/* Style buttons consistently */
+/* ... rest of CSS same as before ... */
+
+
+/* Buttons */
 .proceed-button,
 .search-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1.8rem;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius-md);
+  padding: 10px 15px;
+  color: white;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all var(--transition-speed) var(--transition-timing);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
 }
 
-/* Proceed Button (Accent) */
 .proceed-button {
-  background-color: var(--accent-color);
-  color: var(--text-primary);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--accent-glow);
-}
-.proceed-button:hover {
-  background-color: color-mix(in srgb, var(--accent-color) 90%, white);
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-glow);
+  background-color: #4caf50;
 }
 
-/* Search Button (Primary Gradient) */
 .search-button {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--background-dark);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--primary-glow);
-}
-.search-button:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
-  filter: brightness(1.15);
+  background-color: #2196f3;
 }
 
-/* === Rooms Section & Table (Updated) === */
+/* Room Section */
 .rooms-section {
-  margin-top: 2rem;
-  /* Add fade-in animation if desired */
-  /* animation: fadeIn 0.5s ease-out; */
-}
-
-.rooms-section h2 {
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.8rem; /* Increased padding */
-    border-bottom: 1px solid var(--surface-border);
-}
-
-/* Table Container with Glassmorphism */
-.rooms-table-container {
-  background-color: var(--surface-color); /* Glass background */
-  border-radius: var(--border-radius-lg); /* Match card radius */
-  box-shadow: 0 8px 30px var(--shadow-color);
-  overflow: hidden; /* Clip content and ensure radius works */
-  border: 1px solid var(--surface-border);
-  backdrop-filter: blur(12px); /* The blur effect */
-  overflow-x: auto; /* Enable horizontal scroll on smaller screens */
+  margin-top: 20px;
 }
 
 .rooms-table {
   width: 100%;
-  border-collapse: collapse; /* Cleaner lines */
-  min-width: 800px; /* Prevent extreme squishing of columns */
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
 .rooms-table th,
 .rooms-table td {
-  padding: 1.1rem 1.3rem; /* Generous padding for spacing */
+  border: 1px solid #ccc;
+  padding: 10px;
   text-align: left;
-  border-bottom: 1px solid var(--surface-border); /* Subtle row separator */
-  white-space: nowrap; /* Prevent text wrapping */
-  vertical-align: middle; /* Align content vertically */
 }
 
-/* Table Header Styling */
-.rooms-table th {
-  background-color: rgba(0,0,0, 0.15); /* Slightly darker, semi-transparent header */
-  color: var(--text-primary);
-  font-weight: 600;
-  font-size: 0.8rem; /* Slightly smaller header text */
-  text-transform: uppercase;
-  letter-spacing: 0.8px; /* Increased letter spacing */
-  position: sticky; /* Keep header fixed when scrolling vertically */
-  top: 0;
-  z-index: 10; /* Ensure header stays above content */
-  /* Add a subtle shadow to separate header during scroll */
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
-}
-.rooms-table th:first-child {
-    border-top-left-radius: var(--border-radius-lg); /* Match container radius */
-}
-.rooms-table th:last-child {
-    border-top-right-radius: var(--border-radius-lg);
+.rooms-table thead {
+  background-color: #f2f2f2;
 }
 
-
-/* Table Body Row Styling */
-.rooms-table tbody tr {
-   transition: background-color 0.25s ease, border-left-color 0.25s ease; /* Smooth transitions */
-   cursor: pointer;
-   border-left: 4px solid transparent; /* Reserve space for selection indicator */
+/* Selected Room Row */
+.selected-room {
+  background-color: lightgreen;
 }
 
-/* Row Hover State */
-.rooms-table tbody tr:not(.selected-row):hover {
-  background-color: rgba(255, 255, 255, 0.06); /* Subtle hover effect */
+/* Select Button in table */
+.select-button,
+.select-button-selected {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
 }
 
-/* Selected Row Highlighting */
-.rooms-table tbody tr.selected-row {
-  background-color: rgba(45, 212, 191, 0.1); /* Teal highlight (adjust opacity) */
-  border-left-color: var(--secondary-color); /* Accent border on the left */
-  color: var(--text-primary); /* Make text slightly brighter */
-}
-.rooms-table tbody tr.selected-row td {
-    color: var(--text-primary); /* Ensure text in selected row is bright */
-}
-.rooms-table tbody tr.selected-row:hover {
-   background-color: rgba(45, 212, 191, 0.18); /* Darker teal on hover */
-}
-
-/* Table Data Cell Styling */
-.rooms-table td {
-    font-size: 0.95rem;
-    color: var(--text-secondary); /* Default text color */
-}
-/* Style specific columns if needed (e.g., price) */
-.rooms-table td:nth-child(4) { /* Price column */
-    font-weight: 500;
-    color: var(--text-primary); /* Make price slightly more prominent */
-}
-
-
-/* Select Column Cell Styling */
-.select-button-cell {
-   text-align: center; /* Center the icon */
-   width: 80px; /* Fixed width for select column */
-}
-
-/* Styling for the selection icon itself (FiCheckSquare/FiSquare) */
-.select-button-cell svg {
-    transition: color 0.2s ease, transform 0.2s ease;
-    font-size: 1.4rem; /* Make icon a bit larger */
-}
-
-.rooms-table tbody tr.selected-row .select-button-cell svg {
-    color: var(--secondary-color); /* Teal color when selected */
-    transform: scale(1.1); /* Slightly bigger when selected */
-}
-
-.rooms-table tbody tr:not(.selected-row) .select-button-cell svg {
-    color: var(--text-muted); /* Greyed out when not selected */
-}
-
-
-/* Select Button inside table - Can be removed if clicking row selects */
-.select-button-cell { /* Style the cell containing the button if kept */
-   text-align: center;
-}
 .select-button {
-    /* Style like other small action buttons if kept */
-     display: inline-flex;
-     align-items: center;
-     gap: 0.4rem;
-     padding: 0.4rem 0.8rem;
-     border: 1px solid var(--secondary-color);
-     border-radius: var(--border-radius-sm);
-     cursor: pointer;
-     font-weight: 500;
-     font-size: 0.75rem;
-     transition: all var(--transition-speed) ease;
-     background-color: transparent;
-     color: var(--secondary-color);
-}
-.select-button:hover {
-    background-color: var(--secondary-color);
-    color: var(--background-dark);
-    box-shadow: 0 0 8px var(--secondary-glow);
-}
-.select-button.selected { /* Style for selected state */
-    background-color: var(--secondary-color);
-    color: var(--background-dark);
-    border-color: var(--secondary-color);
+  background-color: #e0e0e0;
+  color: black;
 }
 
+.select-button-selected {
+  background-color: green;
+  color: white;
+}
 
-/* === Guest and Booking Details Section === */
+/* Guest and Booking Details Section */
 .details-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Responsive columns */
-  gap: 2.5rem;
-  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 30px;
 }
 
 /* Card Style for Guest and Booking */
 .guest-details-card,
 .booking-details-card {
-  background-color: var(--surface-color);
-  border-radius: var(--border-radius-lg);
-  padding: 2.5rem;
-  box-shadow: 0 8px 30px var(--shadow-color);
-  border: 1px solid var(--surface-border);
-  backdrop-filter: blur(12px);
-  display: flex;
-  flex-direction: column; /* Allow buttons to be at bottom */
-}
-
-.guest-details-card h2,
-.booking-details-card h2 {
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 2rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid var(--surface-border);
+  background-color: #ffffff;
+  padding: 30px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
 }
 
 /* Inputs Group inside Card */
 .input-group {
-  margin-bottom: 1.5rem; /* More spacing */
+  margin-bottom: 15px;
 }
 
 .input-group label {
   display: block;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-/* Consistent Input Styling */
 .input-group input,
 .input-group select {
   width: 100%;
-  padding: 0.9rem 1.2rem;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--border-radius-sm);
-  font-size: 1rem;
-  box-sizing: border-box;
-  background-color: rgba(17, 24, 39, 0.6);
-  color: var(--text-primary);
-  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
-.input-group input::placeholder {
-     color: var(--text-muted);
-}
-.input-group input:focus,
-.input-group select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px var(--primary-glow);
-}
-.input-group input[type="date"] {
-    color-scheme: dark;
-}
-.input-group input[type="number"]::-webkit-inner-spin-button,
-.input-group input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none; margin: 0;
-}
-.input-group input[type="number"] { -moz-appearance: textfield; }
-
 
 /* Confirm and Cancel Buttons */
 .confirm-cancel-buttons {
   display: flex;
-  gap: 1rem;
-  margin-top: auto; /* Push buttons to bottom */
-  padding-top: 1.5rem; /* Space above buttons */
-  border-top: 1px solid var(--surface-border); /* Separator */
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .confirm-button,
 .cancel-button {
-  flex: 1; /* Equal width */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1.5rem;
+  padding: 12px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all var(--transition-speed) ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  width: 50%;
+  color: white;
 }
 
-/* Confirm Button (Primary Gradient) */
 .confirm-button {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: var(--background-dark);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-.confirm-button:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--primary-glow);
-  transform: translateY(-2px);
+  background-color: #4caf50;
 }
 
-/* Cancel Button (Gray Outline/Fill) */
 .cancel-button {
-  background-color: rgba(75, 85, 99, 0.5);
-  color: var(--text-secondary);
-  border: 1px solid var(--surface-border);
-}
-.cancel-button:hover {
-  background-color: rgba(107, 114, 128, 0.6);
-  color: var(--text-primary);
+  background-color: #f44336;
 }
 
-
-/* === Filter Modal === */
-/* Use consistent modal styling */
-.filter-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(17, 24, 39, 0.85);
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  animation: fadeIn 0.4s ease forwards;
-}
-
+/* Modal for Filters */
 .filter-modal {
-  background: var(--surface-color);
-  backdrop-filter: blur(15px);
-  padding: 2.5rem 3rem;
-  border-radius: var(--border-radius-lg);
-  width: 90%;
-  max-width: 550px; /* Wider modal for filters */
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 30px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
   z-index: 1000;
-  border: 1px solid var(--surface-border);
-  transform: scale(0.95);
-  opacity: 0;
-  animation: fadeInScale 0.4s ease-out 0.1s forwards;
-  max-height: 90vh;
-  overflow-y: auto;
 }
 
-.filter-modal h2 { /* Title */
-  margin-top: 0;
-  margin-bottom: 2rem;
-  color: var(--text-primary);
+.filter-modal h2 {
   text-align: center;
-  font-weight: 600;
-  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
-
-/* Use same input group styling as cards */
-.filter-modal .input-group { margin-bottom: 1rem; }
-.filter-modal .input-group label { font-size: 0.85rem; }
-.filter-modal .input-group input,
-.filter-modal .input-group select { font-size: 0.95rem; padding: 0.8rem 1rem; }
 
 /* Modal Buttons */
 .modal-buttons {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 2.5rem;
-  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .modal-buttons .confirm-button,
 .modal-buttons .cancel-button {
-  flex: 0 1 auto; /* Don't grow */
+  padding: 10px 20px;
+  font-size: 14px;
   width: auto;
-  padding: 0.8rem 1.8rem; /* Match other modal buttons */
 }
 
-
-/* --- Responsive --- */
-@media (max-width: 992px) {
-    .details-section {
-        grid-template-columns: 1fr; /* Stack cards */
-    }
-}
-
-@media (max-width: 768px) {
-  .receptionist-container {
-    padding: 2rem 1.5rem;
-  }
-  .button-group {
-      justify-content: stretch; /* Make buttons full width */
-  }
-  .proceed-button, .search-button {
-      flex-grow: 1; /* Allow buttons to take space */
-  }
-  .details-section {
-      gap: 1.5rem;
-      margin-top: 2rem;
-  }
-  .guest-details-card, .booking-details-card {
-      padding: 1.5rem;
-  }
-  .filter-modal {
-      max-width: 95%;
-      padding: 2rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .button-group {
-      flex-direction: column; /* Stack buttons */
-      align-items: stretch;
-  }
-  .guest-details-card h2, .booking-details-card h2 {
-      font-size: 1.3rem;
-  }
-  .confirm-cancel-buttons {
-      flex-direction: column; /* Stack confirm/cancel */
-  }
-  .modal-buttons {
-      flex-direction: column;
-  }
-  .modal-buttons .confirm-button,
-  .modal-buttons .cancel-button {
-       width: 100%;
-  }
-}
-
-/* Add Loading/Error Styles if not already present */
-.loading-indicator, .error-message {
+/* Utility Class for Centering */
+.center-text {
   text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
 }
-.spinner {
-  width: 35px;
-  height: 35px;
-  border: 4px solid rgba(249, 250, 251, 0.2);
-  border-top-color: var(--primary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-.error-message {
-  background-color: rgba(239, 68, 68, 0.1); /* Reddish background for error */
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: var(--border-radius-md);
-  color: #fecaca; /* Lighter red text */
-}
-
-
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-
-/* --- END OF FILE Receptionist.css --- */
