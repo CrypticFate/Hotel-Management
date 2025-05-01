@@ -1,0 +1,290 @@
+/* --- START OF FILE Employee.css --- */
+
+/* Assume :root variables from Checkout.css are available globally or copy them here */
+:root {
+    /* Copy the full :root definition from previous examples if not global */
+    --primary-color: #38bdf8;
+    --primary-glow: rgba(56, 189, 248, 0.3);
+    --secondary-color: #2dd4bf;
+    --secondary-glow: rgba(45, 212, 191, 0.3);
+    --accent-color: #a78bfa;
+    --accent-glow: rgba(167, 139, 250, 0.3);
+    --background-dark: #111827; /* Dark Blue-Gray */
+    --surface-color: rgba(31, 41, 55, 0.6); /* Semi-transparent darker gray for cards/tables */
+    --surface-alt-color: rgba(55, 65, 81, 0.7); /* Slightly lighter surface */
+    --surface-border: rgba(75, 85, 99, 0.4);
+    --surface-hover-border: rgba(56, 189, 248, 0.5);
+    --text-primary: #f9fafb; /* Off-white */
+    --text-secondary: #d1d5db; /* Light Gray */
+    --text-muted: #9ca3af; /* Medium Gray */
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --glow-shadow: 0 0 15px;
+    --font-family: 'Poppins', sans-serif;
+    --border-radius-lg: 16px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 8px;
+    --transition-speed: 0.3s;
+    --transition-timing: ease;
+    --danger-color: #f43f5e;
+    --danger-glow: rgba(244, 63, 94, 0.3);
+    --success-color: #22c55e;
+    --success-glow: rgba(34, 197, 94, 0.3);
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6; /* Blue for info */
+}
+
+/* === Base & Container === */
+.employee-container {
+    min-height: 100vh;
+    background-color: var(--background-dark);
+    color: var(--text-secondary);
+    font-family: var(--font-family);
+}
+
+.content-wrapper {
+    padding: 2.5rem 4rem; /* Consistent padding */
+    max-width: 1800px; /* Even wider content */
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+/* === Header Section === */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--surface-border);
+}
+.header-section h1 {
+    color: var(--text-primary);
+    font-size: 2rem; /* Larger title */
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* === KPI/Stats Section === */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.stat-card-mini { /* Similar to manager KPIs */
+  background-color: var(--surface-color);
+  padding: 1.2rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.stat-icon-mini { font-size: 1.8rem; opacity: 0.8; }
+.stat-info h4 { margin: 0 0 0.2rem 0; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; }
+.stat-info p { margin: 0; font-size: 1.6rem; font-weight: 600; color: var(--text-primary); }
+
+
+/* === Themed Buttons (Standardized) === */
+.action-button { /* Base class for all action buttons */
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 0.8rem 1.8rem; border: 1px solid transparent; border-radius: var(--border-radius-md);
+  cursor: pointer; font-weight: 600; font-size: 0.9rem;
+  transition: all var(--transition-speed) var(--transition-timing);
+  text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+}
+.action-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; filter: grayscale(50%); }
+
+/* Button Variants */
+.action-button.primary { /* Add/Save New */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--background-dark); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--primary-glow);
+}
+.action-button.primary:hover:not(:disabled) { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow); filter: brightness(1.15); }
+
+.action-button.secondary { /* Filter */
+  background-color: transparent; color: var(--primary-color); border-color: var(--primary-color);
+  padding: calc(0.8rem - 1px) calc(1.8rem - 1px);
+}
+.action-button.secondary:hover:not(:disabled) { background-color: var(--primary-color); color: var(--background-dark); box-shadow: 0 0 10px var(--primary-glow); }
+
+.action-button.success { /* Save Edit */
+    background-color: var(--success-color); color: var(--background-dark);
+}
+.action-button.success:hover:not(:disabled) { background-color: color-mix(in srgb, var(--success-color) 90%, white); box-shadow: 0 0 8px var(--success-glow); transform: translateY(-2px); }
+
+.action-button.danger { /* Remove/Confirm Delete */
+    background-color: var(--danger-color); color: var(--text-primary);
+}
+.action-button.danger:hover:not(:disabled) { background-color: color-mix(in srgb, var(--danger-color) 90%, white); box-shadow: 0 0 8px var(--danger-glow); transform: translateY(-2px); }
+
+.action-button.warning { /* Edit */
+     background-color: var(--warning-color); color: var(--background-dark);
+}
+.action-button.warning:hover:not(:disabled) { background-color: color-mix(in srgb, var(--warning-color) 90%, white); box-shadow: 0 0 8px var(--warning-glow); transform: translateY(-2px); }
+
+
+.action-button.muted { /* Cancel */
+    background-color: rgba(75, 85, 99, 0.5); color: var(--text-secondary);
+    border: 1px solid var(--surface-border); padding: calc(0.8rem - 1px) calc(1.8rem - 1px);
+}
+.action-button.muted:hover:not(:disabled) { background-color: rgba(107, 114, 128, 0.6); color: var(--text-primary); }
+
+/* Smaller variants for table actions */
+.action-button.small { padding: 0.5rem 1rem; font-size: 0.8rem; gap: 0.4rem; }
+
+
+/* === Table Styling === */
+.table-container {
+    background-color: var(--surface-color); border-radius: var(--border-radius-lg);
+    box-shadow: 0 8px 30px var(--shadow-color); overflow: hidden;
+    border: 1px solid var(--surface-border); backdrop-filter: blur(12px);
+    margin: 2rem 0; overflow-x: auto;
+}
+.employee-table { width: 100%; border-collapse: collapse; min-width: 1200px; }
+.employee-table th, .employee-table td { padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--surface-border); white-space: nowrap; vertical-align: middle; }
+.employee-table th { background-color: rgba(0,0,0, 0.15); color: var(--text-primary); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; position: sticky; top: 0; z-index: 10; }
+.employee-table tbody tr { transition: background-color 0.2s ease; }
+.employee-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.05); }
+.employee-table td { font-size: 0.95rem; color: var(--text-secondary); }
+
+/* Inline Editing Styles */
+.employee-table td.editing input,
+.employee-table td.editing select { /* Apply to td for easier targeting */
+    width: calc(100% + 1.6rem); /* Span slightly wider than padding */
+    margin: -0.5rem -0.8rem; /* Adjust margin to fill padding */
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--primary-color); border-radius: var(--border-radius-sm);
+    font-size: 0.9rem; background-color: rgba(17, 24, 39, 0.9); color: var(--text-primary);
+    box-shadow: 0 0 0 2px var(--primary-glow);
+}
+.employee-table td.editing input:focus,
+.employee-table td.editing select:focus { outline: none; }
+
+/* Status Badge Styles */
+.status-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: capitalize; display: inline-block; }
+.status-badge.working { background-color: rgba(34, 197, 94, 0.15); color: #4ade80; }
+.status-badge.inactive, .status-badge.not\.working { background-color: rgba(244, 63, 94, 0.15); color: #f87171; }
+
+/* Action Buttons within Table */
+.table-actions { display: flex; gap: 0.6rem; align-items: center; }
+
+
+/* === Pagination Controls === */
+.pagination-controls {
+    padding: 1rem 1.5rem; display: flex; gap: 1rem; align-items: center; justify-content: center;
+    background-color: rgba(0,0,0, 0.1); border-top: 1px solid var(--surface-border);
+    border-bottom-left-radius: var(--border-radius-lg); border-bottom-right-radius: var(--border-radius-lg);
+}
+.pagination-controls button { /* Use base button class + variants */
+    padding: 0.6rem 1.2rem; border: 1px solid var(--surface-border); border-radius: var(--border-radius-sm);
+    background: var(--surface-alt-color); color: var(--text-secondary); cursor: pointer;
+    font-weight: 500; transition: all var(--transition-speed) ease;
+}
+.pagination-controls button:hover:not(:disabled) { background-color: rgba(255, 255, 255, 0.1); border-color: var(--primary-color); color: var(--text-primary); }
+.pagination-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+.pagination-controls span { font-size: 0.9rem; color: var(--text-muted); }
+
+
+/* === Add Employee Form / Modals (General Styles) === */
+.popup-overlay { /* Shared overlay */
+  position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.85); z-index: 999;
+  display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px);
+  opacity: 0; animation: fadeIn 0.4s ease forwards; padding: 1rem; /* Padding for smaller screens */
+}
+.modal-content { /* Base modal container */
+  background: var(--surface-color); backdrop-filter: blur(15px); padding: 2.5rem 3rem;
+  border-radius: var(--border-radius-lg); width: 90%;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4); z-index: 1000; border: 1px solid var(--surface-border);
+  transform: scale(0.95); opacity: 0; animation: fadeInScale 0.4s ease-out 0.1s forwards;
+  color: var(--text-secondary); max-height: 90vh; overflow-y: auto;
+}
+/* Specific modal max-widths */
+.add-employee-form-modal { max-width: 800px; /* Wider form */ }
+.filter-modal-content { max-width: 500px; }
+.confirmation-popup-content { max-width: 450px; text-align: center; }
+
+/* Modal Header */
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--surface-border); }
+.modal-header h3 { color: var(--text-primary); font-size: 1.6rem; margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.8rem;}
+.modal-close-button { background: none; border: none; font-size: 1.8rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem; line-height: 1; transition: color 0.2s; }
+.modal-close-button:hover { color: var(--danger-color); }
+
+/* Form Grid */
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem 2rem; margin-bottom: 2rem; }
+
+/* Input Group Styling */
+.input-group { position: relative; }
+.input-group label { display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.6rem; font-weight: 500; }
+.input-group input, .input-group select {
+    width: 100%; padding: 0.9rem 1.2rem; border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius-sm); font-size: 1rem; background-color: rgba(17, 24, 39, 0.6);
+    color: var(--text-primary); transition: all 0.2s ease;
+}
+.input-group input::placeholder { color: var(--text-muted); }
+.input-group input:focus, .input-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--primary-glow); background-color: rgba(17, 24, 39, 0.9); }
+.input-group input[type="date"] { color-scheme: dark; }
+
+/* Error Styling */
+.input-group input.error, .input-group select.error { border-color: var(--danger-color); box-shadow: 0 0 0 3px var(--danger-glow); }
+.error-message { color: #f87171; font-size: 0.8rem; margin-top: 0.4rem; display: block; }
+
+/* Modal Actions */
+.modal-actions { display: flex; gap: 1rem; justify-content: flex-end; padding-top: 2rem; margin-top: 1rem; border-top: 1px solid var(--surface-border); }
+.confirmation-popup-content .modal-actions { justify-content: center; } /* Center confirmation buttons */
+
+/* --- Loading / Error / No Data States --- */
+.loading-indicator, .error-display, .no-data-message {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 4rem 2rem; text-align: center; color: var(--text-muted);
+    min-height: 200px; /* Ensure it takes some space */
+    background-color: rgba(31, 41, 55, 0.3); /* Subtle background */
+    border-radius: var(--border-radius-md);
+    margin: 2rem 0;
+    border: 1px dashed var(--surface-border);
+}
+.spinner { width: 40px; height: 40px; border: 4px solid rgba(249, 250, 251, 0.2); border-top-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
+.error-display { background-color: rgba(244, 63, 94, 0.1); border-color: var(--danger-color); color: #fca5a5; }
+.error-display .error-icon { font-size: 2.5rem; color: var(--danger-color); margin-bottom: 1rem; }
+.no-data-message .no-data-icon { font-size: 2.5rem; color: var(--text-muted); opacity: 0.6; margin-bottom: 1rem; }
+.loading-indicator p, .error-display p, .no-data-message p { font-size: 1.1rem; margin-top: 0.5rem; }
+
+
+/* Animations */
+@keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .employee-table { min-width: 900px; } /* Adjust min-width as needed */
+}
+@media (max-width: 768px) {
+    .content-wrapper { padding: 2rem 1.5rem; }
+    .header-section { flex-direction: column; align-items: stretch; text-align: center; }
+    .header-actions { justify-content: center; }
+    .stats-section { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    .add-employee-form-modal .form-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+    .content-wrapper { padding: 1.5rem 1rem; }
+    .header-section h1 { font-size: 1.5rem; }
+    .pagination-controls { flex-direction: column; gap: 0.5rem; }
+    .modal-content { padding: 2rem 1.5rem; }
+    .modal-actions { flex-direction: column; }
+    .modal-actions .action-button { width: 100%; }
+}
+
+/* --- END OF FILE Employee.css --- */
