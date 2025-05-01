@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <title>Hotel Management System</title>
       <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         {/*Receptionist Pages*/}
         <Route path="/rp-dashboard" element={<PrivateRoute element={<RPDash />} role="receptionist" />} />
@@ -37,10 +37,16 @@ function App() {
         <Route path="/checkout" element={<PrivateRoute element={<Checkout />} role="receptionist" />} />
         <Route path="/feature" element={<PrivateRoute element={<Features />} role="receptionist" />} />
         <Route path="/real-checkout" element={<PrivateRoute element={<RealCheckout />} role="receptionist" />} />
-       
       
-        
-       
+        {/* Manager Pages */}
+        <Route path="/manager-dashboard" element={<PrivateRoute element={<ManDash />} role="manager" />} />
+        <Route path="/employee-info" element={<PrivateRoute element={<Employee />} role="manager" />} />
+        {/*<Route path="/expenses" element={<PrivateRoute element={<Manexpenses />} role="manager" />} />*/}
+        <Route path="/rooms" element={<PrivateRoute element={<ManRoom />} role="manager" />} />
+        <Route path="/inventory" element={<PrivateRoute element={<Inventory />} role="manager" />} />
+        <Route path="/ledgerbook" element={<PrivateRoute element={<Ledgerbook />} role="manager" />} />
+        <Route path="/billledger" element={<PrivateRoute element={<MaintenanceLedgerPage/>} role="manager" />} />
+        <Route path="/financial-report-manager/:hotelId" element={<PrivateRoute element={<FinancialReport/>} role="manager"/>} />
         {/* Admin Pages */}
         <Route path="/admin-dashboard" element={<PrivateRoute element={<AdminDashBoard/>} role="admin"/>} />
         <Route path="/update-managers" element={<PrivateRoute element={<UpdateManager/>} role="admin"/>} />
