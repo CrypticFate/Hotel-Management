@@ -1,186 +1,381 @@
-.realcheckout-container {
-    min-height: 100vh;
-    background-color: #f8fafc;
-    display: flex;
-    flex-direction: column;
+/* --- START OF FILE RealCheckout.css --- */
 
-  }
-  
-  .realcheckout-content-wrapper {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    flex-grow: 1;
-  }
-  
-  .realcheckout-header-section {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1.5rem;
-  }
-  
-  .realcheckout-add-button {
-    background-color: #3B82F6;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .realcheckout-add-button:hover {
-    background-color: #2563eb;
-  }
-  
-  .realcheckout-table-container {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-  }
-  
-  th {
-    background-color: #3B82F6;
-    color: white;
-    font-weight: bold;
-  }
-  
-  tr:hover {
-    background-color: #f1f5f9;
-  }
-  
-  .realcheckout-action-buttons {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .realcheckout-billing-button {
-    background-color: #38bdf8;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .realcheckout-billing-button:hover {
-    background-color: #0ea5e9;
-  }
-  
-  .realcheckout-extend-button {
-    background-color: #4ade80;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .realcheckout-extend-button:hover {
-    background-color: #22c55e;
-  }
-  
-  .realcheckout-popup {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    width: 400px;
-  }
-  
-  .realcheckout-popup-actions {
-    margin-top: 20px;
+/* Assume :root variables from Checkout.css are available globally or copy them here */
+
+.realcheckout-container {
+  min-height: calc(100vh - 60px); /* Adjust based on Navbar height */
+  background-color: var(--background-dark);
+  color: var(--text-secondary);
+  padding: 2.5rem 4rem; /* Consistent padding */
+  box-sizing: border-box;
+}
+
+.realcheckout-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem; /* Increased spacing */
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.realcheckout-header h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+/* Filter Button Styling (Matches other primary buttons) */
+.realcheckout-filter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) var(--transition-timing);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--background-dark);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px var(--primary-glow);
+}
+
+.realcheckout-filter-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
+  filter: brightness(1.15);
+}
+
+
+/* === Table Container Styling === */
+.realcheckout-table-container {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 30px var(--shadow-color);
+  overflow: hidden; /* Important for border-radius */
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(12px);
+  overflow-x: auto; /* Allow horizontal scroll on small screens */
+}
+
+.realcheckout-table {
+  width: 100%;
+  border-collapse: collapse; /* Use collapse for cleaner lines */
+  min-width: 800px; /* Prevent extreme squishing */
+}
+
+.realcheckout-table th,
+.realcheckout-table td {
+  padding: 1rem 1.2rem; /* More padding */
+  text-align: left;
+  border-bottom: 1px solid var(--surface-border);
+  white-space: nowrap; /* Prevent wrapping in cells */
+}
+
+.realcheckout-table th {
+  background-color: rgba(0,0,0, 0.1); /* Subtle header background */
+  color: var(--text-primary);
+  font-weight: 600; /* Bolder headers */
+  font-size: 0.85rem; /* Slightly smaller header font */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky; /* Keep header visible on scroll */
+  top: 0;
+  z-index: 1;
+}
+
+.realcheckout-table tbody tr {
+   transition: background-color 0.2s ease;
+}
+
+.realcheckout-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle hover */
+}
+
+.realcheckout-table td {
+    font-size: 0.95rem;
+}
+
+/* === Action Buttons in Table === */
+.realcheckout-action-buttons {
+  display: flex;
+  gap: 0.8rem; /* Slightly more gap */
+  align-items: center; /* Vertically align buttons if heights differ */
+}
+
+.realcheckout-billing-button,
+.realcheckout-extend-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem; /* Smaller padding */
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-weight: 500; /* Medium weight */
+  font-size: 0.8rem; /* Smaller font */
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
+}
+
+/* Billing Button (Secondary Accent) */
+.realcheckout-billing-button {
+  background-color: var(--secondary-color);
+  color: var(--background-dark);
+  box-shadow: 0 2px 5px rgba(45, 212, 191, 0.2);
+}
+.realcheckout-billing-button:hover {
+  background-color: color-mix(in srgb, var(--secondary-color) 90%, black);
+  box-shadow: 0 4px 10px rgba(45, 212, 191, 0.3), 0 0 8px var(--secondary-glow);
+  transform: translateY(-1px);
+}
+
+/* Extend Button (Accent Color) */
+.realcheckout-extend-button {
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+   box-shadow: 0 2px 5px rgba(167, 139, 250, 0.2);
+}
+.realcheckout-extend-button:hover {
+  background-color: color-mix(in srgb, var(--accent-color) 90%, white);
+  box-shadow: 0 4px 10px rgba(167, 139, 250, 0.3), 0 0 8px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+
+/* === Popups (Extend Visit) & Filter Modal === */
+/* Re-use modal styles from previous refactors */
+.popup-overlay,
+.filter-modal-overlay { /* Use overlay for both */
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.85);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.realcheckout-popup, /* Style for Extend */
+.realcheckout-filter-modal { /* Style for Filter */
+  background: var(--surface-color);
+  backdrop-filter: blur(15px);
+  padding: 2.5rem 3rem;
+  border-radius: var(--border-radius-lg);
+  width: 90%;
+  max-width: 480px; /* Consistent max-width */
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  border: 1px solid var(--surface-border);
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeInScale 0.4s ease-out 0.1s forwards;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.realcheckout-popup h2,
+.realcheckout-filter-modal h2 { /* Use h2 for titles */
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.realcheckout-popup label,
+.realcheckout-filter-modal label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.realcheckout-popup input,
+.realcheckout-filter-modal input,
+.realcheckout-filter-modal select {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: rgba(17, 24, 39, 0.6);
+  color: var(--text-primary);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.realcheckout-popup input::placeholder,
+.realcheckout-filter-modal input::placeholder {
+    color: var(--text-muted);
+}
+
+.realcheckout-popup input:focus,
+.realcheckout-filter-modal input:focus,
+.realcheckout-filter-modal select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* Date input specific styles */
+.realcheckout-popup input[type="date"],
+.realcheckout-filter-modal input[type="date"] {
+    color-scheme: dark; /* Hint for better date picker styling */
+}
+
+
+/* Actions within Popups/Modals */
+.realcheckout-popup-actions,
+.realcheckout-filter-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons right */
+  margin-top: 2.5rem;
+  gap: 1rem;
+}
+
+.realcheckout-popup-actions button,
+.realcheckout-filter-actions button {
+  flex: 0 1 auto;
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Confirm/Apply Button */
+.realcheckout-popup-actions button:first-child,
+.realcheckout-filter-actions button:first-child {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--background-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.realcheckout-popup-actions button:first-child:hover,
+.realcheckout-filter-actions button:first-child:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), 0 0 10px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+/* Cancel Button */
+.realcheckout-popup-actions button:last-child,
+.realcheckout-filter-actions button:last-child {
+  background-color: rgba(75, 85, 99, 0.5);
+  color: var(--text-secondary);
+  border: 1px solid var(--surface-border);
+}
+.realcheckout-popup-actions button:last-child:hover,
+.realcheckout-filter-actions button:last-child:hover {
+  background-color: rgba(107, 114, 128, 0.6);
+  color: var(--text-primary);
+}
+
+
+/* === No Guests Message === */
+.realcheckout-no-guests {
+  margin-top: 4rem;
+  text-align: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  border: 1px dashed var(--surface-border);
+  backdrop-filter: blur(10px);
+}
+.realcheckout-no-guests .icon {
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+.realcheckout-no-guests h2 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+.realcheckout-no-guests p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 450px;
+  line-height: 1.7;
+}
+
+
+/* === Loading/Error States (Add if needed) === */
+.loading-indicator { /* Example */
+  /* Style like in previous examples */
+}
+.error-message { /* Example */
+  /* Style like no-guests but maybe red icon/border */
+}
+
+
+/* --- Animations (reuse from Checkout.css if global) --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+  .realcheckout-container {
+    padding: 2rem 1.5rem;
   }
-  
-  .realcheckout-filter-modal {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+  .realcheckout-header {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
   }
-  
-  .realcheckout-filter-modal h3 {
-    margin-bottom: 20px;
+  .realcheckout-filter-button {
+      width: 100%;
   }
-  
-  .realcheckout-filter-modal label {
-    margin-top: 10px;
-    display: block;
-    font-weight: bold;
+  .realcheckout-table th,
+  .realcheckout-table td {
+      padding: 0.8rem 1rem;
   }
-  
-  .realcheckout-filter-modal input, .realcheckout-filter-modal select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  
-  .realcheckout-filter-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .realcheckout-filter-actions button {
-    background-color: #3B82F6;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .realcheckout-filter-actions button:hover {
-    background-color: #2563eb;
-  }
-  .realcheckout-no-guests {
-    text-align: center;
-    padding: 3rem 1rem;
-    background: #f8fafc;
-    border-radius: 12px;
-    margin-top: 2rem;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-  }
-  
-  .realcheckout-no-guests h2 {
-    color: #1e293b;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .realcheckout-no-guests p {
-    color: #64748b;
-    font-size: 1rem;
-  }
-    
+}
+
+@media (max-width: 480px) {
+    .realcheckout-header h1 {
+        font-size: 1.5rem;
+    }
+    .realcheckout-popup,
+    .realcheckout-filter-modal {
+        padding: 2rem 1.5rem;
+        max-width: 95%;
+    }
+    .realcheckout-popup-actions,
+    .realcheckout-filter-actions {
+        flex-direction: column; /* Stack buttons */
+    }
+    .realcheckout-popup-actions button,
+    .realcheckout-filter-actions button {
+        width: 100%;
+    }
+}
+
+/* --- END OF FILE RealCheckout.css --- */
